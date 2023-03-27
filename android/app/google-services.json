@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1001587259459",
+    "project_id": "pendataan-37e18",
+    "storage_bucket": "pendataan-37e18.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1001587259459:android:db31c600b5f956acbe7cf6",
+        "android_client_info": {
+          "package_name": "com.example.pendataan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1001587259459-n56bei5koihnr31gjefu07bi0ajitkqd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWkxKobdKZQmtdD4FttG7_bOgQIsShHWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1001587259459-n56bei5koihnr31gjefu07bi0ajitkqd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

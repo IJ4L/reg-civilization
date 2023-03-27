@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pendataan/utils/colors.dart';
 import 'package:pendataan/view/widget/button_widget.dart';
-import 'package:pendataan/view/widget/textfied_widget.dart';
 
-class Addoperator extends StatelessWidget {
-  const Addoperator({super.key});
+class Addadmin extends StatelessWidget {
+  const Addadmin({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class Addoperator extends StatelessWidget {
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: const Text(
-                  'Tambah Operator',
+                  'Tambah Admin',
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 16,
@@ -32,8 +31,6 @@ class Addoperator extends StatelessWidget {
               ),
               // const TextFieldInput(txt: 'Username'),
               // const TextFieldInput(txt: 'Password'),
-              // const TextFieldInput(txt: 'Wilayah'),
-              // const TextFieldInput(txt: 'Target'),
               const Spacer(),
               const Button(
                 title: 'Simpan',

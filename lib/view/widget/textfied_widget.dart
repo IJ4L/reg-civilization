@@ -1,15 +1,19 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:pendataan/utils/colors.dart';
 
 import 'sizedbox_widget.dart';
 
 class TextFieldInput extends StatelessWidget {
-  const TextFieldInput({
+  TextFieldInput({
     super.key,
     required this.txt,
+    required this.controller,
   });
 
   final String txt;
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +30,7 @@ class TextFieldInput extends StatelessWidget {
         ),
         const Sizedbox(jarak: 0.01),
         TextField(
+          controller: controller,
           decoration: InputDecoration(
             fillColor: colorGrey,
             filled: true,

@@ -18,7 +18,7 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.06,
+        height: MediaQuery.of(context).size.height * 0.065,
         width: double.infinity,
         decoration: BoxDecoration(
           color: colorButton,

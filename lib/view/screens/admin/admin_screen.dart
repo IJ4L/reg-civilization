@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pendataan/utils/colors.dart';
 import 'package:pendataan/view/screens/admin/addoperator_screen.dart';
 import 'package:pendataan/view/screens/login_screen.dart';
-import 'package:pendataan/view/screens/operator/addata_screen.dart';
 import 'package:pendataan/view/widget/sizedbox_widget.dart';
 
 import '../../widget/button_widget.dart';
@@ -22,7 +21,7 @@ class Adminpage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ProfileCard(),
+              const ProfileCard(role: 'Admin'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -152,7 +151,7 @@ class Adminpage extends StatelessWidget {
               GestureDetector(
                 onTap: () => Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => const Loginpage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 ),
                 child: const Button(
                   title: 'Logout',
