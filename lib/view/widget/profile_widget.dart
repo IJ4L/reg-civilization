@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pendataan/view/widget/sizedbox_widget.dart';
 
 import '../../utils/colors.dart';
 
@@ -12,38 +14,58 @@ class ProfileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.14,
+    return Container(
+      height: 55.h,
       width: double.infinity,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      padding: const EdgeInsets.all(16),
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Nursyamsu Rijal Usman',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 18,
-            ),
+          Image.asset(
+            "assets/images/user.png",
           ),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.01,
+            width: 16.w,
           ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Selamat Datang',
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 10.sp,
+                ),
+                textScaleFactor: 1.0,
+              ),
+              const Sizedbox(jarak: 0.0065),
+              Text(
+                'Nursyamsu Rijal Usman',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14.sp,
+                  letterSpacing: 1,
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
           Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 5,
-            ),
+            height: 24.h,
+            width: 70.w,
             decoration: BoxDecoration(
               color: colorBlue,
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(6.h),
             ),
-            child: Text(
-              role,
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 14,
-                color: Colors.white,
+            child: Center(
+              child: Text(
+                role,
+                style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 10.sp,
+                  color: Colors.white,
+                ),
+                textScaleFactor: 1.0,
               ),
             ),
           ),

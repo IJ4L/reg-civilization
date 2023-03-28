@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pendataan/utils/colors.dart';
 
 class CardItem extends StatelessWidget {
@@ -19,6 +20,7 @@ class CardItem extends StatelessWidget {
         Container(
           color: colorGrey,
           width: MediaQuery.of(context).size.width * 0.2,
+          padding: EdgeInsets.all(4.h),
           child: Text(
             title,
             style: const TextStyle(
@@ -32,10 +34,11 @@ class CardItem extends StatelessWidget {
           width: MediaQuery.of(context).size.width * 0.5,
           child: Text(
             subtitle,
-            style: const TextStyle(
-              fontSize: 14,
+            style: TextStyle(
+              fontSize: 9.sp,
             ),
             overflow: TextOverflow.ellipsis,
+            textScaleFactor: 1.0,
           ),
         ),
       ],

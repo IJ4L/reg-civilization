@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pendataan/models/user_model.dart';
-
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pendataan/utils/colors.dart';
 import 'package:pendataan/view/widget/button_widget.dart';
-import 'package:pendataan/view/widget/textfied_widget.dart';
 
 class Addoperator extends StatelessWidget {
   const Addoperator({super.key});

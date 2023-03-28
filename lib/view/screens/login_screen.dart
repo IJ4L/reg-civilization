@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:pendataan/controllers/login/login_cubit.dart';
 import 'package:pendataan/utils/colors.dart';
 import 'package:pendataan/view/screens/admin/admin_screen.dart';
 import 'package:pendataan/view/screens/operator/operator_screen.dart';
 import 'package:pendataan/view/screens/superadmin/superadmin_screen.dart';
+import 'package:pendataan/view/widget/button_widget.dart';
 
 import '../widget/textfied_widget.dart';
 
@@ -60,33 +62,35 @@ class LoginPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           body: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            padding: EdgeInsets.all(16.h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: MediaQuery.of(context).size.height * 0.18),
-                const Center(
+                SizedBox(height: 120.h),
+                Center(
                   child: Text(
                     'Selamat Datang',
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
-                      fontSize: 28,
+                      fontSize: 20.sp,
                     ),
+                    textScaleFactor: 1.0,
                   ),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 4.h),
                 Center(
                   child: Text(
-                    'Silahkan Masukkan Username dan Password',
+                    'Silahkan Masukkan Email dan Password anda',
                     style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 16,
+                      fontSize: 12.sp,
                       color: Colors.black.withOpacity(0.4),
                     ),
+                    textScaleFactor: 1.0,
                   ),
                 ),
-                const SizedBox(height: 24),
-                TextFieldInput(txt: 'Username', controller: emailController),
+                SizedBox(height: 24.h),
+                TextFieldInput(txt: 'Email', controller: emailController),
                 TextFieldInput(txt: 'Password', controller: passwordController),
                 const Spacer(),
                 GestureDetector(
@@ -94,23 +98,11 @@ class LoginPage extends StatelessWidget {
                     emailAddress: emailController.text,
                     password: passwordController.text,
                   ),
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.065,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: colorBlue,
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'Masuk',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
+                  child: const Button(
+                    title: 'Masuk',
+                    colorButton: colorBlue,
+                    colorBorder: Colors.white,
+                    colorText: Colors.white,
                   ),
                 )
               ],
