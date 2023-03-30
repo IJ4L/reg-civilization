@@ -32,7 +32,7 @@ class SuperAdmin extends LoginState {
 }
 
 class Operator extends LoginState {
-  UserModel user;
+  AdminModel user;
 
   Operator(this.user);
 

@@ -38,7 +38,10 @@ class _SuperadminState extends State<Superadmin> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const ProfileCard(role: 'Superadmin'),
+                    const ProfileCard(
+                      role: 'Superadmin',
+                      email: 'Superadmin@gmail.com',
+                    ),
                     const Sizedbox(jarak: 0.02),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -80,64 +83,154 @@ class _SuperadminState extends State<Superadmin> {
                     ),
                     const Sizedbox(jarak: 0.02),
                     Expanded(
-                      child: ListView.separated(
-                        itemBuilder: (context, index) => Stack(
-                          children: [
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.09,
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 22,
-                                vertical: 16,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: colorGrey,
+                      child: RefreshIndicator(
+                        onRefresh: () =>
+                            SuperadminCubit.get(context).getAdmin(),
+                        child: ListView.separated(
+                          itemBuilder: (context, index) => Stack(
+                            children: [
+                              Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.09,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 22,
+                                  vertical: 16,
                                 ),
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CardItem(
-                                    subtitle: '${state.admin[index].email}',
-                                    title: 'Email',
-                                  ),
-                                  CardItem(
-                                    subtitle: state.admin[index].status == true
-                                        ? 'Aktif'
-                                        : 'Nonaktif',
-                                    title: 'Status',
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Positioned(
-                              right: 0,
-                              child: Container(
-                                height: 40.h,
-                                width: 40.w,
-                                margin: EdgeInsets.all(10.h),
                                 decoration: BoxDecoration(
-                                  color: colorBlue.withOpacity(0.15),
-                                  borderRadius: BorderRadius.circular(
-                                    4.h,
+                                  border: Border.all(
+                                    color: colorGrey,
                                   ),
+                                  borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.edit,
-                                    color: colorBlue,
-                                    size: 16.h,
-                                  ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    CardItem(
+                                      subtitle: '${state.admin[index].email}',
+                                      title: 'Email',
+                                    ),
+                                    CardItem(
+                                      subtitle:
+                                          state.admin[index].status == true
+                                              ? 'Aktif'
+                                              : 'Nonaktif',
+                                      title: 'Status',
+                                    ),
+                                  ],
                                 ),
                               ),
-                            )
-                          ],
+                              Positioned(
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: () => showModalBottomSheet(
+                                    context: context,
+                                    builder: (context) {
+                                      return SingleChildScrollView(
+                                        child: Container(
+                                          height: 170.h,
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.all(16),
+                                          child: Column(
+                                            children: [
+                                              const Sizedbox(jarak: 0.02),
+                                              Text(
+                                                '${state.admin[index].email}',
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: colorBlue,
+                                                ),
+                                                textScaleFactor: 1.0,
+                                              ),
+                                              const Spacer(),
+                                              InkWell(
+                                                onTap: () {
+                                                  SuperadminCubit.get(context)
+                                                      .disableAdmin(
+                                                    '${state.admin[index].email}',
+                                                    state.admin[index].status
+                                                        as bool,
+                                                  );
+                                                  SuperadminCubit.get(context)
+                                                      .getAdmin();
+                                                },
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                child: buttonMaker(
+                                                  'assets/images/addAdmin.png',
+                                                  state.admin[index].status ==
+                                                          true
+                                                      ? 'Nonaktifkan'
+                                                      : 'Aktifkan',
+                                                ),
+                                              ),
+                                              const Sizedbox(jarak: 0.01),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  SuperadminCubit.get(context)
+                                                      .deleteAdmin(
+                                                    state.admin[index].email
+                                                        .toString(),
+                                                    state.admin[index].password
+                                                        .toString(),
+                                                  );
+                                                  SuperadminCubit.get(context)
+                                                      .getAdmin();
+                                                  ScaffoldMessenger.of(context)
+                                                      .showSnackBar(
+                                                    const SnackBar(
+                                                      content: Text(
+                                                        'Berhasil dihapus',
+                                                      ),
+                                                    ),
+                                                  );
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Button(
+                                                  title: 'Hapus Admin',
+                                                  colorButton: Colors.red,
+                                                  colorBorder: Colors.white,
+                                                  colorText: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(25),
+                                      ),
+                                    ),
+                                  ),
+                                  child: Container(
+                                    height: 40.h,
+                                    width: 40.w,
+                                    margin: EdgeInsets.all(10.h),
+                                    decoration: BoxDecoration(
+                                      color: colorBlue.withOpacity(0.15),
+                                      borderRadius: BorderRadius.circular(
+                                        4.h,
+                                      ),
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.edit,
+                                        color: colorBlue,
+                                        size: 16.h,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          separatorBuilder: (_, index) => SizedBox(height: 8.h),
+                          itemCount: state.admin.length,
                         ),
-                        separatorBuilder: (_, index) => SizedBox(height: 8.h),
-                        itemCount: state.admin.length,
                       ),
                     ),
                     const Sizedbox(jarak: 0.02),

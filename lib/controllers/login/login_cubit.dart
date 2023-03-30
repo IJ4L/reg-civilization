@@ -3,10 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pendataan/models/user_model.dart';
+
+import '../../models/admin_model.dart';
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
+
+  String? email;
+  String? idkecamatan;
+  String? akses;
 
   login({required String emailAddress, required String password}) async {
     try {
@@ -21,13 +27,21 @@ class LoginCubit extends Cubit<LoginState> {
           .get();
 
       final role = data.data()!['role'];
+      final status = data.data()!['status'];
 
-      if (role != null) {
+      if (role != null && status != false) {
         switch (role) {
           case 'Admin':
             emit(Admin(
               UserModel.fromJson(data.data() as Map<String, dynamic>),
             ));
+            email = UserModel.fromJson(data.data() as Map<String, dynamic>)
+                .email
+                .toString();
+            idkecamatan =
+                AdminModel.fromJson(data.data() as Map<String, dynamic>)
+                    .id_kecamatan
+                    .toString();
             break;
           case 'SuperAdmin':
             emit(SuperAdmin(
@@ -36,16 +50,28 @@ class LoginCubit extends Cubit<LoginState> {
             break;
           case 'Operator':
             emit(Operator(
-              UserModel.fromJson(data.data() as Map<String, dynamic>),
+              AdminModel.fromJson(data.data() as Map<String, dynamic>),
             ));
+            akses = AdminModel.fromJson(data.data() as Map<String, dynamic>)
+                .createdBy
+                .toString();
+            email = AdminModel.fromJson(data.data() as Map<String, dynamic>)
+                .email
+                .toString();
+            idkecamatan =
+                AdminModel.fromJson(data.data() as Map<String, dynamic>)
+                    .id_kecamatan
+                    .toString();
             break;
         }
+      } else {
+        emit(const LoginFailure('Akunmu dinonaktifkan'));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        emit(const LoginFailure('No user found for that email.'));
+        emit(const LoginFailure('User dengan email ini tidak ada'));
       } else if (e.code == 'wrong-password') {
-        emit(const LoginFailure('Wrong password provided for that user.'));
+        emit(const LoginFailure('Password salah.'));
       } else {
         emit(LoginFailure(e.message.toString()));
       }

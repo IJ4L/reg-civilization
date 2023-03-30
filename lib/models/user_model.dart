@@ -1,13 +1,13 @@
 class UserModel {
-  String? username;
+  String? password;
   String? role;
   String? email;
   bool? status;
 
-  UserModel({this.username, this.role, this.email, this.status});
+  UserModel({this.password, this.role, this.email, this.status});
 
   UserModel.fromJson(Map<String, dynamic> json) {
-    username = json['username'];
+    password = json['password'];
     role = json['role'];
     email = json['email'];
     status = json['status'];

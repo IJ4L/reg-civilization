@@ -24,15 +24,16 @@ class TextFieldInput extends StatelessWidget {
         const Sizedbox(jarak: 0.02),
         Text(
           txt,
-          style: const TextStyle(
+          style: TextStyle(
             fontWeight: FontWeight.w600,
-            fontSize: 14,
+            fontSize: 10.sp,
           ),
+          textScaleFactor: 1.0,
         ),
         const Sizedbox(jarak: 0.01),
         TextField(
           controller: controller,
-          cursorRadius: Radius.circular(8),
+          cursorRadius: const Radius.circular(8),
           decoration: InputDecoration(
             fillColor: colorGrey,
             filled: true,

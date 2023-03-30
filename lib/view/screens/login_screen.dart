@@ -92,7 +92,7 @@ class LoginPage extends StatelessWidget {
                 SizedBox(height: 24.h),
                 TextFieldInput(txt: 'Email', controller: emailController),
                 TextFieldInput(txt: 'Password', controller: passwordController),
-                const Spacer(),
+                SizedBox(height: 16.h),
                 GestureDetector(
                   onTap: () => BlocProvider.of<LoginCubit>(context).login(
                     emailAddress: emailController.text,

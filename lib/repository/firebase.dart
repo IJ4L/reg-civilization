@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:pendataan/controllers/admin/admin_cubit.dart';
 import 'package:pendataan/controllers/superadmin/superadmin_cubit.dart';
+import 'package:pendataan/models/admin_model.dart';
 import 'package:pendataan/models/user_model.dart';
 
 // Future<List<UserModel>>
@@ -40,4 +42,21 @@ Future<String> createAdmin({
   } catch (e) {
     return e.toString();
   }
+}
+
+Future<List<AdminModel>> getAllOperators(String email) async {
+  try {
+    var data = await FirebaseFirestore.instance
+        .collection('users')
+        .where('createdBy', isEqualTo: email)
+        .get();
+
+    final List<AdminModel> admin =
+        data.docs.map((e) => AdminModel.fromJson(e.data())).toList();
+
+    return admin;
+  } catch (e) {
+    AdminFailure(e.toString());
+  }
+  return [];
 }

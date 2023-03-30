@@ -8,9 +8,11 @@ class ProfileCard extends StatelessWidget {
   const ProfileCard({
     super.key,
     required this.role,
+    required this.email,
   });
 
   final String role;
+  final String email;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class ProfileCard extends StatelessWidget {
               ),
               const Sizedbox(jarak: 0.0065),
               Text(
-                'Nursyamsu Rijal Usman',
+                email,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14.sp,
@@ -54,7 +56,14 @@ class ProfileCard extends StatelessWidget {
             height: 24.h,
             width: 70.w,
             decoration: BoxDecoration(
-              color: colorBlue,
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  colorBlue,
+                  colorBlue.withOpacity(0.2),
+                ],
+              ),
               borderRadius: BorderRadius.circular(6.h),
             ),
             child: Center(
