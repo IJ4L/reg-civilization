@@ -554,9 +554,12 @@ class _AdminpageState extends State<Adminpage> {
 
   GestureDetector refresh(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.read<AdminCubit>().getAllOperator(
-            context.read<LoginCubit>().email.toString(),
-          ),
+      onTap: () {
+        context.read<AdminCubit>().getAllOperator(
+              context.read<LoginCubit>().email.toString(),
+            );
+        Navigator.pop(context);
+      },
       child: SizedBox(
         height: 140.h,
         width: double.infinity,
