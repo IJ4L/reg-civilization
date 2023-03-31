@@ -36,6 +36,7 @@ Future<String> createAdmin({
       'password': password,
       'role': 'Admin',
       'status': true,
+      'target': '100'
     });
 
     return 'Succses';

@@ -13,6 +13,7 @@ class LoginCubit extends Cubit<LoginState> {
   String? email;
   String? idkecamatan;
   String? akses;
+  String? target;
 
   login({required String emailAddress, required String password}) async {
     try {
@@ -42,6 +43,9 @@ class LoginCubit extends Cubit<LoginState> {
                 AdminModel.fromJson(data.data() as Map<String, dynamic>)
                     .id_kecamatan
                     .toString();
+            target = AdminModel.fromJson(data.data() as Map<String, dynamic>)
+                .target
+                .toString();
             break;
           case 'SuperAdmin':
             emit(SuperAdmin(
@@ -78,5 +82,14 @@ class LoginCubit extends Cubit<LoginState> {
     } catch (error) {
       emit(LoginFailure(error.toString()));
     }
+  }
+
+  Future<void> getTarget(String email) async {
+    final data =
+        await FirebaseFirestore.instance.collection('users').doc(email).get();
+
+    target = AdminModel.fromJson(data.data() as Map<String, dynamic>)
+        .target
+        .toString();
   }
 }

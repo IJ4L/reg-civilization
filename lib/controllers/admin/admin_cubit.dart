@@ -151,6 +151,12 @@ class AdminCubit extends Cubit<AdminState> {
     }
   }
 
+  Future<void> updateTarge(String email, String targetUpdate) async {
+    FirebaseFirestore.instance.collection('users').doc(email).update({
+      'target': targetUpdate,
+    });
+  }
+
   Future<void> getAllOperator(String email) async {
     emit(AdminLoading());
     try {

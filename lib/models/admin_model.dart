@@ -10,6 +10,7 @@ class AdminModel {
   String? role;
   bool? status;
   String? id_kecamatan;
+  String? target;
 
   AdminModel({
     this.email,
@@ -21,6 +22,7 @@ class AdminModel {
     this.password,
     this.provinsi,
     this.id_kecamatan,
+    this.target,
   });
 
   AdminModel.fromJson(Map<String, dynamic> json) {
@@ -33,5 +35,6 @@ class AdminModel {
     password = json['password'];
     provinsi = json['provinsi'];
     id_kecamatan = json['id_kecamatan'];
+    target = json['target'];
   }
 }

@@ -8,6 +8,7 @@ import 'package:pendataan/utils/colors.dart';
 import 'package:pendataan/view/screens/admin/addoperator_screen.dart';
 import 'package:pendataan/view/widget/dropdown_widget.dart';
 import 'package:pendataan/view/widget/sizedbox_widget.dart';
+import 'package:pendataan/view/widget/textfied_widget.dart';
 
 import '../../../models/wilayah_model.dart';
 import '../../widget/button_widget.dart';
@@ -32,6 +33,8 @@ class _AdminpageState extends State<Adminpage> {
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController target = TextEditingController();
+
     return BlocConsumer<AdminCubit, AdminState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -112,43 +115,92 @@ class _AdminpageState extends State<Adminpage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 36.h,
-                            width: 140.w,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                                colors: [
-                                  colorBlue,
-                                  colorBlue.withOpacity(0.2),
-                                ],
+                          GestureDetector(
+                            onTap: () => showModalBottomSheet(
+                              context: context,
+                              builder: (context) => Container(
+                                height: 350.h,
+                                padding: const EdgeInsets.all(16),
+                                child: Column(
+                                  children: [
+                                    TextFieldInput(
+                                      txt: 'Target Pendataan',
+                                      controller: target,
+                                    ),
+                                    SizedBox(
+                                      height: 8.0.h,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        context.read<AdminCubit>().updateTarge(
+                                              context
+                                                  .read<LoginCubit>()
+                                                  .email
+                                                  .toString(),
+                                              target.text,
+                                            );
+                                        context.read<LoginCubit>().getTarget(
+                                              context
+                                                  .read<LoginCubit>()
+                                                  .email
+                                                  .toString(),
+                                            );
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Button(
+                                        title: 'Simpan Target',
+                                        colorButton: colorBlue,
+                                        colorBorder: Colors.white,
+                                        colorText: Colors.white,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                              borderRadius: BorderRadius.circular(4),
+                              shape: const RoundedRectangleBorder(
+                                borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(25),
+                                ),
+                              ),
                             ),
-                            child: Center(
-                              child: BlocBuilder<AdminCubit, AdminState>(
-                                builder: (context, state) {
-                                  if (state is AdminGetAll) {
+                            child: Container(
+                              height: 36.h,
+                              width: 140.w,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                  colors: [
+                                    colorBlue,
+                                    colorBlue.withOpacity(0.2),
+                                  ],
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Center(
+                                child: BlocBuilder<AdminCubit, AdminState>(
+                                  builder: (context, state) {
+                                    if (state is AdminGetAll) {
+                                      return Text(
+                                        'Data Warga : ${state.warga.length} / ${context.read<LoginCubit>().target}',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 10.sp,
+                                        ),
+                                        textScaleFactor: 1.0,
+                                      );
+                                    }
                                     return Text(
-                                      'Data Warga : ${state.warga.length} / 100',
+                                      '-',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 10.sp,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.sp,
                                       ),
-                                      textScaleFactor: 1.0,
                                     );
-                                  }
-                                  return Text(
-                                    '-',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18.sp,
-                                    ),
-                                  );
-                                },
+                                  },
+                                ),
                               ),
                             ),
                           ),
